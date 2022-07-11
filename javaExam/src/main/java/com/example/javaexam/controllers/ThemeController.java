@@ -1,8 +1,10 @@
 package com.example.javaexam.controllers;
 
+import com.example.javaexam.Models.Admin;
 import com.example.javaexam.Models.School;
-import com.example.javaexam.Models.Student;
+
 import com.example.javaexam.repositiories.SchoolRepo;
+import com.example.javaexam.services.AdminService;
 import com.example.javaexam.services.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,10 @@ public class ThemeController {
     SchoolService schoolService;
     @Autowired
     SchoolRepo schoolRepo;
+    @Autowired
+    AdminService adminService;
+
+
 
     @GetMapping(path="/schools")
     public  String listSchools(Model model){
@@ -68,6 +74,21 @@ return  "edit_School";
     @GetMapping("/schools/delete/{id}")
     public  String deleteSchool(@PathVariable Long id){
         schoolRepo.deleteById(id);
+        return "redirect:/schools";
+    }
+
+    @GetMapping("/register")
+    public  String signup(Model model){
+        Admin admin=new Admin();
+        model.addAttribute("user",admin);
+        return "signup";
+
+    }
+
+    @PostMapping("/theme/register")
+    public  String saveUser(@ModelAttribute("user") Admin admin ){
+adminService.register(admin);
+
         return "redirect:/schools";
     }
 }

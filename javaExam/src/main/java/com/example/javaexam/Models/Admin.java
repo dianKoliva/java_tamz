@@ -1,28 +1,16 @@
 package com.example.javaexam.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
-public class User {
-
-
+public class Admin {
+    @Id
+    @Column(name = "id", nullable = false)
     @GeneratedValue
     private Long id;
-    private String name;
-    private String password;
-    private String email;
-
-    public User() {
-    }
-
-    public User(String password, String email) {
-        this.password = password;
-        this.email = email;
-    }
+    private  String name;
+    private  String password;
 
     public String getName() {
         return name;
@@ -40,6 +28,11 @@ public class User {
         this.password = password;
     }
 
+    public Admin(String password, String email) {
+        this.password = password;
+        this.email = email;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -48,19 +41,22 @@ public class User {
         this.email = email;
     }
 
-    public User(String name, String password, String email) {
+    public Admin() {
+    }
+
+    private  String email;
+
+    public Admin(String name, String password, String email) {
         this.name = name;
         this.password = password;
         this.email = email;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Id
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
